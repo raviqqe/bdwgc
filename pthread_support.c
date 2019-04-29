@@ -1403,6 +1403,17 @@ GC_INNER void GC_do_blocking_inner(ptr_t data, void * context GC_ATTR_UNUSED)
     UNLOCK();
 }
 
+GC_API void GC_CALL GC_set_stack_bottom(void * thread, char * stack_bottom)
+{
+    GC_thread me = GC_lookup_thread((pthread_t) thread);
+
+    if ((me -> flags & MAIN_THREAD) == 0) {
+        me -> stack_end = stack_bottom;
+    } else {
+        GC_stackbottom = stack_bottom;
+    }
+}
+
 /* GC_call_with_gc_active() has the opposite to GC_do_blocking()        */
 /* functionality.  It might be called from a user function invoked by   */
 /* GC_do_blocking() to temporarily back allow calling any GC function   */

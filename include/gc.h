@@ -357,6 +357,8 @@ GC_API GC_ATTR_DEPRECATED char *GC_stackbottom;
                                 /* GC_call_with_gc_active() and         */
                                 /* GC_register_my_thread() instead.     */
 
+GC_API void GC_CALL GC_set_stack_bottom(void * thread, char * stack_bottom);
+
 GC_API GC_ATTR_DEPRECATED int GC_dont_precollect;
                                 /* Do not collect as part of GC         */
                                 /* initialization.  Should be set only  */
